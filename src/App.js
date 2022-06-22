@@ -5,8 +5,8 @@ import TodoItem from './components/TodoItem';
 
 
 function App() {
-  const [todos, setTodos] = useState([])
-
+  const [todos, setTodos] = useState([]);
+  
   const addTodo = (text) => {
     let id = 1
     if(todos.length > 0) {
@@ -21,6 +21,11 @@ function App() {
   const removeTodo = (id) => {
     let updatedTodos = [...todos].filter((todo) => todo.id !== id)
     setTodos(updatedTodos)
+  };
+
+  const editTodo = (id) => {
+    const findTodo = todos.find((todo) => todo.id === id)
+    editTodo(findTodo)
   };
 
   const completeTodo = (id) => {
@@ -41,11 +46,13 @@ function App() {
       <hr className="seperator" />
       {todos.map((todo) => {
         return (
-          <TodoItem removeTodo={removeTodo} completeTodo={completeTodo} todo={todo} key={todo.id}/>
+          <TodoItem removeTodo={removeTodo} editTodo={editTodo} completeTodo={completeTodo} todo={todo} key={todo.id}/>
         )
       })}
     </div>
   );
+  
 }
+
 
 export default App;
